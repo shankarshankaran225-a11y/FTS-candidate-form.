@@ -125,18 +125,38 @@ Cheque returned within 30 days`;
     const val = (id) => ($(id)?.value || "").trim();
     const phoneClean = val("#phone").replace(/\D/g, "");
 
-    const payload = {
-      name: val("#name"),
-      email: val("#email"),
-      phone: phoneClean,
-      role: val("#role"),
-      designation: val("#designation"),
-      experience: val("#experience"),
-      services: [...serviceBoxes].map(s => s.value).join(", "),
-      terms: TERMS_TEXT
+    const detailsMsg =
+  "*CANDIDATE DETAILS*\n\n" +
+  "Name: " + payload.name + "\n" +
+  "Email: " + payload.email + "\n" +
+  "Phone: " + payload.phone + "\n\n" +
+
+  "Role: " + payload.role + "\n" +
+  "Designation: " + payload.designation + "\n\n" +
+
+  "Current CTC: " + payload.currentCTC + "\n" +
+  "Expected CTC: " + payload.expectedCTC + "\n\n" +
+
+  "Tech: " + payload.techKnowledge + "\n" +
+  "Experience: " + payload.experience + "\n" +
+  "Notice Period: " + payload.noticePeriod + "\n\n" +
+
+  "Graduation Year / Backlogs: " + payload.graduationYearBacklog + "\n\n" +
+
+  "PF: " + payload.pf + "\n" +
+  "PF Start: " + payload.pfStart + "\n" +
+  "PF End: " + payload.pfEnd + "\n\n" +
+
+  "Real Time Experience: " + payload.realtimeExperience + "\n\n" +
+
+  "Referred By: " + payload.referredBy + "\n" +
+  "Issue: " + payload.issue + "\n\n" +
+
+  "Services:\n" + payload.services + "\n\n" +
+  "Terms:\n" + TERMS_TEXT;
     };
 
-    fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", {
+    fetch("https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -162,3 +182,4 @@ Cheque returned within 30 days`;
   });
 
 });
+
