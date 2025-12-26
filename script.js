@@ -59,7 +59,10 @@ Example 2:
 Security purpose
 Returned within 30 days after de-registration & PF proof`;
 
-  
+ const agreeAll = $("#agreeAll");
+  const serviceBoxes = $$(".service");
+  const termBoxes = $$(".term");
+
   agreeAll?.addEventListener("change", () => {
     [...serviceBoxes, ...termBoxes].forEach(c => {
       c.checked = agreeAll.checked;
@@ -155,5 +158,3 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
-
-
