@@ -25,17 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- FORM LOGIC ---------- */
 
-  const $ = (s) => document.querySelector(s);
-  const $$ = (s) => document.querySelectorAll(s);
+ const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
 
-  const form = $("#ftsForm");
-  const steps = $$(".form-step");
-  const dots = $$(".step");
-  const nextBtns = $$(".next");
-  const prevBtns = $$(".prev");
+const form = $("#ftsForm");
+const steps = $$(".form-step");
+const dots = $$(".step");
+const nextBtns = $$(".next");
+const prevBtns = $$(".prev");
 
-  let currentStep = 0;
-  if (!form || !steps.length) return;
+const agreeAll = $("#agreeAll");
+const serviceBoxes = $$(".service");
+const termBoxes = $$(".term");
+
+let currentStep = 0;
+if (!form || !steps.length) return;
 
   /* ---------- TERMS ---------- */
 const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms & Conditions
@@ -138,3 +142,4 @@ agreeAll?.addEventListener("change", () => {
   });
 
 });
+
