@@ -138,17 +138,3 @@ agreeAll?.addEventListener("change", () => {
   });
 
 });
-
-
-
-
-    })
-    .catch(() => {
-      alert("Submission failed. Please try again.");
-    });
-
-  });
-
-});
-
-
