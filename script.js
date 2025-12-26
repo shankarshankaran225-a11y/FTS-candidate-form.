@@ -1,15 +1,15 @@
 /* =====================================================
-   FLASH TECH SOLUTIONS
-   FINAL STRUCTURED JS (FIXED)
+   FLASH TECH SOLUTIONS – FINAL JS (EMOJI VERSION)
+   Password + Multi-Step + Full Payload + WhatsApp
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ---------------- HELPERS ---------------- */
+  /* ================= HELPERS ================= */
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
-  /* ---------------- PASSWORD ---------------- */
+  /* ================= PASSWORD ================= */
   const SITE_PASSWORD = "FTS@2026";
 
   const unlockBtn = $("#unlockBtn");
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       siteContent.classList.remove("hidden");
       passwordError.textContent = "";
     } else {
-      passwordError.textContent = "Wrong Password";
+      passwordError.textContent = "❌ Wrong Password";
     }
   });
 
@@ -32,11 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------------- FORM CHECK ---------------- */
+  /* ================= FORM CHECK ================= */
   const form = $("#ftsForm");
   if (!form) return;
 
-  /* ---------------- STEPS ---------------- */
+  /* ================= STEPS ================= */
   const steps = $$(".form-step");
   const dots = $$(".step");
   const nextBtns = $$(".next");
@@ -74,22 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* ---------------- TERMS ---------------- */
+  /* ================= TERMS ================= */
   const agreeAll = $("#agreeAll");
   const serviceBoxes = $$(".service");
+  const termBoxes = $$(".term");
 
   const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms
 
-3 Month CTC – 12 LPA (₹3,00,000)
-Take-home ₹30,000
-Document charges ₹30,000 (if HR asks)
-Cheque returned within 30 days`;
+💰 3 Month CTC – 12 LPA (₹3,00,000)
+💵 Take-home ₹30,000
+📄 Document Charges ₹30,000 (if HR asks)
+⏱ Document Generation – 3 Hours
+📝 Cheque before interview (Security)
+🔁 Returned within 30 days after de-registration & PF proof`;
 
   agreeAll?.addEventListener("change", () => {
-    serviceBoxes.forEach(c => c.checked = agreeAll.checked);
+    [...serviceBoxes, ...termBoxes].forEach(c => {
+      c.checked = agreeAll.checked;
+    });
   });
 
-  /* ---------------- SUBMIT ---------------- */
+  /* ================= SUBMIT ================= */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -97,7 +102,6 @@ Cheque returned within 30 days`;
       alert("Please select all services");
       return;
     }
-
     if (!agreeAll.checked) {
       alert("Please accept Terms & Conditions");
       return;
@@ -106,7 +110,7 @@ Cheque returned within 30 days`;
     const val = (id) => ($(id)?.value || "").trim();
     const phoneClean = val("#phone").replace(/\D/g, "");
 
-    /* ✅ PAYLOAD (FIXED) */
+    /* ================= PAYLOAD ================= */
     const payload = {
       name: val("#name"),
       email: val("#email"),
@@ -128,43 +132,62 @@ Cheque returned within 30 days`;
       terms: TERMS_TEXT
     };
 
-    /* ---------------- MESSAGE ---------------- */
-    const detailsMsg =
-  "*📋 CANDIDATE FULL DETAILS*\n\n" +
+    /* ================= ADMIN WHATSAPP (FULL) ================= */
+    const adminMsg =
+      "📋 *CANDIDATE FULL DETAILS*\n\n" +
 
-  "*Basic Details*\n" +
-  "👤 Name: " + payload.name + "\n" +
-  "📧 Email: " + payload.email + "\n" +
-  "📱 Phone: " + payload.phone + "\n" +
-  "💼 Role: " + payload.role + "\n" +
-  "🧑‍💻 Designation: " + payload.designation + "\n\n" +
+      "👤 *Basic Details*\n" +
+      "🧑 Name: " + payload.name + "\n" +
+      "📧 Email: " + payload.email + "\n" +
+      "📞 Phone: " + payload.phone + "\n" +
+      "🎯 Role: " + payload.role + "\n" +
+      "💼 Designation: " + payload.designation + "\n\n" +
 
-  "*CTC Information*\n" +
-  "💰 Current CTC: " + payload.currentCTC + "\n" +
-  "🎯 Expected CTC: " + payload.expectedCTC + "\n\n" +
+      "💰 *CTC Details*\n" +
+      "📌 Current CTC: " + payload.currentCTC + "\n" +
+      "📈 Expected CTC: " + payload.expectedCTC + "\n\n" +
 
-  "*Professional Details*\n" +
-  "🧠 Tech Knowledge: " + payload.techKnowledge + "\n" +
-  "🕒 Experience: " + payload.experience + "\n" +
-  "⏳ Notice Period: " + payload.noticePeriod + "\n\n" +
+      "🧠 *Professional Details*\n" +
+      "💻 Technology: " + payload.techKnowledge + "\n" +
+      "🕒 Experience: " + payload.experience + "\n" +
+      "⏳ Notice Period: " + payload.noticePeriod + "\n\n" +
 
-  "*PF Details*\n" +
-  "🏦 PF Available: " + payload.pf + "\n" +
-  "📅 PF Start: " + payload.pfStart + "\n" +
-  "📅 PF End: " + payload.pfEnd + "\n\n" +
+      "🏦 *PF Details*\n" +
+      "✔ PF Available: " + payload.pf + "\n" +
+      "📅 PF Start: " + payload.pfStart + "\n" +
+      "📅 PF End: " + payload.pfEnd + "\n\n" +
 
-  "*Additional Information*\n" +
-  "🛠 Real Time Experience: " + payload.realtimeExperience + "\n" +
-  "🤝 Referred By: " + payload.referredBy + "\n" +
-  "⚠ Issue: " + payload.issue + "\n\n" +
+      "📌 *Additional Info*\n" +
+      "🔁 Realtime Experience: " + payload.realtimeExperience + "\n" +
+      "🤝 Referred By: " + payload.referredBy + "\n" +
+      "⚠ Issue: " + payload.issue + "\n\n" +
 
-  "*FTS Services Selected*\n" +
-  payload.services + "\n\n" +
+      "🛠 *Services Selected*\n" +
+      payload.services + "\n\n" +
 
-  "*Terms Accepted*\n" +
-  payload.terms;
+      "📜 *Terms Accepted*\n" +
+      payload.terms;
 
-    /* ---------------- POST ---------------- */
+    /* ================= CANDIDATE WHATSAPP ================= */
+    const candidateMsg =
+      "🎉 *Registration Successful – Flash Tech Solutions*\n\n" +
+      "👋 Hi " + payload.name + ",\n\n" +
+
+      "✅ Your details have been successfully submitted.\n\n" +
+
+      "📌 *Summary*\n" +
+      "💻 Technology: " + payload.techKnowledge + "\n" +
+      "🕒 Experience: " + payload.experience + "\n" +
+      "💼 Role: " + payload.role + "\n\n" +
+
+      "🛠 *Services Selected*\n" +
+      payload.services + "\n\n" +
+
+      "📞 Our team will contact you shortly.\n\n" +
+      "🚀 *Flash Tech Solutions*\n" +
+      "Empowering Your IT Journey";
+
+    /* ================= GOOGLE SHEET ================= */
     fetch(
       "https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec",
       {
@@ -179,13 +202,23 @@ Cheque returned within 30 days`;
 
       const ADMIN_NUMBER = "918825940013";
 
+      /* Admin */
       window.open(
-        "https://wa.me/" + ADMIN_NUMBER + "?text=" + encodeURIComponent(detailsMsg),
+        `https://wa.me/${ADMIN_NUMBER}?text=${encodeURIComponent(adminMsg)}`,
         "_blank"
       );
+
+      /* Candidate (after delay) */
+      if (phoneClean.length === 10) {
+        setTimeout(() => {
+          window.open(
+            `https://wa.me/91${phoneClean}?text=${encodeURIComponent(candidateMsg)}`,
+            "_blank"
+          );
+        }, 4000);
+      }
     })
-    .catch(() => alert("Submission failed. Please try again."));
+    .catch(() => alert("❌ Submission failed. Try again"));
   });
 
 });
-
