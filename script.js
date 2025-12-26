@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ================= GOOGLE SHEET ================= */
     fetch(
-      "https://script.google.com/macros/s/AKfycbwoAQ5gyjzY0HCU459xoe1yZa6U1PqhscEhynI1ZY06F76su85pT5wWsNGxuYzwCxNM/exec",
+      "https://script.google.com/macros/s/AKfycby0u_NhccgKebLPVovcnaaKjvR8av4ihisM7U8pFQABpqQ84rfUcKfAhRcSZl8ImezV/exec",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -222,4 +222,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
