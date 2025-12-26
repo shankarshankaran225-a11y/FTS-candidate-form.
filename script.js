@@ -125,7 +125,7 @@ Cheque returned within 30 days`;
     const val = (id) => ($(id)?.value || "").trim();
     const phoneClean = val("#phone").replace(/\D/g, "");
 
-    const detailsMsg =
+  const detailsMsg =
   "*CANDIDATE DETAILS*\n\n" +
   "Name: " + payload.name + "\n" +
   "Email: " + payload.email + "\n" +
@@ -154,7 +154,6 @@ Cheque returned within 30 days`;
 
   "Services:\n" + payload.services + "\n\n" +
   "Terms:\n" + TERMS_TEXT;
-    };
 
     fetch("https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec", {
       method: "POST",
