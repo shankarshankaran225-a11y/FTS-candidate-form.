@@ -23,7 +23,7 @@ body {
 .bg {
   position: fixed;
   inset: 0;
-  background: url("https://drive.google.com/file/d/1GgXX4EsGxEQa4O6Gw__53ALCXwKLSr6K/view?usp=sharing")
+  background: url("https://your-red-office-image.jpg")
     center / cover no-repeat;
   filter: blur(6px);
   z-index: -1;
@@ -353,4 +353,5 @@ input[type="radio"] {
   }
 
 }
+
 
