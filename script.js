@@ -1,41 +1,28 @@
-/* =====================================================
-   FLASH TECH SOLUTIONS
-   FINAL ALL-IN-ONE JS
-   WhatsApp Auto Message
-   Candidate + Admin (Different Content)
-===================================================== */
+const SITE_PASSWORD = "FTS@2026";
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* ---------- PASSWORD ---------- */
-  const SITE_PASSWORD = "FTS@2026";
-
-  const unlockBtn = document.getElementById("unlockBtn");
-  const sitePassword = document.getElementById("sitePassword");
-  const passwordBox = document.getElementById("passwordBox");
-  const siteContent = document.getElementById("siteContent");
-  const passwordError = document.getElementById("passwordError");
-
-  unlockBtn?.addEventListener("click", () => {
-    if (sitePassword.value === SITE_PASSWORD) {
-      passwordBox.style.display = "none";
-      siteContent.classList.remove("hidden");
-      passwordError.textContent = "";
+  document.getElementById("unlockBtn").onclick = () => {
+    const val = document.getElementById("sitePassword").value;
+    if (val === SITE_PASSWORD) {
+      document.getElementById("passwordBox").style.display = "none";
+      document.getElementById("siteContent").classList.remove("hidden");
     } else {
-      passwordError.textContent = "Wrong Password";
+      document.getElementById("passwordError").innerText = "Wrong Password";
     }
-  });
+  };
 
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  document.getElementById("year").textContent =
+  new Date().getFullYear();
 
-  /* ---------- HELPERS ---------- */
+  /* ---------- FORM LOGIC ---------- */
+
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
-  /* ---------- FORM ---------- */
   const form = $("#ftsForm");
-  if (!form) return;
+  const steps = $$(".form-step");
+  const dots = $$(".step");
+  const nextBtns = $$(".next");
+  const prevBtns = $$(".prev");
 
   const agreeAll = $("#agreeAll");
   const serviceBoxes = $$(".service");
@@ -141,3 +128,4 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
+
