@@ -130,11 +130,39 @@ Cheque returned within 30 days`;
 
     /* ---------------- MESSAGE ---------------- */
     const detailsMsg =
-      "*CANDIDATE DETAILS*\n\n" +
-      "Name: " + payload.name + "\n" +
-      "Email: " + payload.email + "\n" +
-      "Phone: " + payload.phone + "\n\n" +
-      "Experience: " + payload.experience + "\n";
+  "*📋 CANDIDATE FULL DETAILS*\n\n" +
+
+  "*Basic Details*\n" +
+  "👤 Name: " + payload.name + "\n" +
+  "📧 Email: " + payload.email + "\n" +
+  "📱 Phone: " + payload.phone + "\n" +
+  "💼 Role: " + payload.role + "\n" +
+  "🧑‍💻 Designation: " + payload.designation + "\n\n" +
+
+  "*CTC Information*\n" +
+  "💰 Current CTC: " + payload.currentCTC + "\n" +
+  "🎯 Expected CTC: " + payload.expectedCTC + "\n\n" +
+
+  "*Professional Details*\n" +
+  "🧠 Tech Knowledge: " + payload.techKnowledge + "\n" +
+  "🕒 Experience: " + payload.experience + "\n" +
+  "⏳ Notice Period: " + payload.noticePeriod + "\n\n" +
+
+  "*PF Details*\n" +
+  "🏦 PF Available: " + payload.pf + "\n" +
+  "📅 PF Start: " + payload.pfStart + "\n" +
+  "📅 PF End: " + payload.pfEnd + "\n\n" +
+
+  "*Additional Information*\n" +
+  "🛠 Real Time Experience: " + payload.realtimeExperience + "\n" +
+  "🤝 Referred By: " + payload.referredBy + "\n" +
+  "⚠ Issue: " + payload.issue + "\n\n" +
+
+  "*FTS Services Selected*\n" +
+  payload.services + "\n\n" +
+
+  "*Terms Accepted*\n" +
+  payload.terms;
 
     /* ---------------- POST ---------------- */
     fetch(
@@ -160,3 +188,4 @@ Cheque returned within 30 days`;
   });
 
 });
+
