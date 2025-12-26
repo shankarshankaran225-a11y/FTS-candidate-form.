@@ -34,10 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtns = $$(".next");
   const prevBtns = $$(".prev");
 
-  const agreeAll = $("#agreeAll");
-  const serviceBoxes = $$(".service");
-  const termBoxes = $$(".term");
-
   let currentStep = 0;
   if (!form || !steps.length) return;
 
@@ -158,3 +154,4 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
+
