@@ -189,9 +189,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ================= GOOGLE SHEET ================= */
     fetch(
-      "https://script.google.com/macros/s/AKfycbwDQzlzy8hbgxOHqZK9YMBUI4-GEEwDPA2Y0fcKAZ9HOCZaWLO86B0zhwrqJcywI_Nx/exec",
+      "https://script.google.com/macros/s/AKfycbwKk-xFZ0jpJjZxwjQsgj3AE9Dc2KL88zIMO8_9-iuJvqskIJ5zuLxVDAhyhOP8oZs/exec",
       {
         method: "POST",
+        mode: "no-cors"
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       }
@@ -222,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
 
 
 
