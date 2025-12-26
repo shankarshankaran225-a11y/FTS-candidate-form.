@@ -1,20 +1,15 @@
 /* =====================================================
    FLASH TECH SOLUTIONS
-   FINAL STRUCTURED JS
-   Password + Multi-Step + Submit
+   FINAL STRUCTURED JS (FIXED)
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* =====================================================
-     HELPERS
-  ===================================================== */
+  /* ---------------- HELPERS ---------------- */
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
-  /* =====================================================
-     PASSWORD SCREEN
-  ===================================================== */
+  /* ---------------- PASSWORD ---------------- */
   const SITE_PASSWORD = "FTS@2026";
 
   const unlockBtn = $("#unlockBtn");
@@ -37,15 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const yearEl = $("#year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* =====================================================
-     FORM CHECK
-  ===================================================== */
+  /* ---------------- FORM CHECK ---------------- */
   const form = $("#ftsForm");
-  if (!form) return; // very important safety
+  if (!form) return;
 
-  /* =====================================================
-     STEP / DOT ELEMENTS
-  ===================================================== */
+  /* ---------------- STEPS ---------------- */
   const steps = $$(".form-step");
   const dots = $$(".step");
   const nextBtns = $$(".next");
@@ -55,10 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showStep = (index) => {
     steps.forEach((step, i) => {
-      step.classList.toggle("active", i === index);
       step.style.display = i === index ? "block" : "none";
+      step.classList.toggle("active", i === index);
     });
-
     dots.forEach((dot, i) => {
       dot.classList.toggle("active", i === index);
     });
@@ -66,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showStep(currentStep);
 
-  /* NEXT BUTTON */
   nextBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       if (currentStep < steps.length - 1) {
@@ -76,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* PREVIOUS BUTTON */
   prevBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       if (currentStep > 0) {
@@ -86,12 +74,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* =====================================================
-     TERMS & CHECKBOX LOGIC
-  ===================================================== */
+  /* ---------------- TERMS ---------------- */
   const agreeAll = $("#agreeAll");
   const serviceBoxes = $$(".service");
-  const termBoxes = $$(".term");
 
   const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms
 
@@ -101,14 +86,10 @@ Document charges ₹30,000 (if HR asks)
 Cheque returned within 30 days`;
 
   agreeAll?.addEventListener("change", () => {
-    [...serviceBoxes, ...termBoxes].forEach(c => {
-      c.checked = agreeAll.checked;
-    });
+    serviceBoxes.forEach(c => c.checked = agreeAll.checked);
   });
 
-  /* =====================================================
-     FORM SUBMIT
-  ===================================================== */
+  /* ---------------- SUBMIT ---------------- */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -125,60 +106,57 @@ Cheque returned within 30 days`;
     const val = (id) => ($(id)?.value || "").trim();
     const phoneClean = val("#phone").replace(/\D/g, "");
 
-  const detailsMsg =
-  "*CANDIDATE DETAILS*\n\n" +
-  "Name: " + payload.name + "\n" +
-  "Email: " + payload.email + "\n" +
-  "Phone: " + payload.phone + "\n\n" +
+    /* ✅ PAYLOAD (FIXED) */
+    const payload = {
+      name: val("#name"),
+      email: val("#email"),
+      phone: phoneClean,
+      role: val("#role"),
+      designation: val("#designation"),
+      currentCTC: val("#currentCTC"),
+      expectedCTC: val("#expectedCTC"),
+      techKnowledge: val("#techKnowledge"),
+      experience: val("#experience"),
+      noticePeriod: val("#noticeperiod"),
+      pf: $('input[name="pf"]:checked')?.value || "",
+      pfStart: val("#pfStart"),
+      pfEnd: val("#pfEnd"),
+      realtimeExperience: val("#realtimeExperience"),
+      referredBy: val("#referredBy"),
+      issue: val("#issue"),
+      services: [...serviceBoxes].map(s => s.value).join(", "),
+      terms: TERMS_TEXT
+    };
 
-  "Role: " + payload.role + "\n" +
-  "Designation: " + payload.designation + "\n\n" +
+    /* ---------------- MESSAGE ---------------- */
+    const detailsMsg =
+      "*CANDIDATE DETAILS*\n\n" +
+      "Name: " + payload.name + "\n" +
+      "Email: " + payload.email + "\n" +
+      "Phone: " + payload.phone + "\n\n" +
+      "Experience: " + payload.experience + "\n";
 
-  "Current CTC: " + payload.currentCTC + "\n" +
-  "Expected CTC: " + payload.expectedCTC + "\n\n" +
-
-  "Tech: " + payload.techKnowledge + "\n" +
-  "Experience: " + payload.experience + "\n" +
-  "Notice Period: " + payload.noticePeriod + "\n\n" +
-
-  "Graduation Year / Backlogs: " + payload.graduationYearBacklog + "\n\n" +
-
-  "PF: " + payload.pf + "\n" +
-  "PF Start: " + payload.pfStart + "\n" +
-  "PF End: " + payload.pfEnd + "\n\n" +
-
-  "Real Time Experience: " + payload.realtimeExperience + "\n\n" +
-
-  "Referred By: " + payload.referredBy + "\n" +
-  "Issue: " + payload.issue + "\n\n" +
-
-  "Services:\n" + payload.services + "\n\n" +
-  "Terms:\n" + TERMS_TEXT;
-
-    fetch("https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    })
+    /* ---------------- POST ---------------- */
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }
+    )
     .then(() => {
       form.style.display = "none";
       $("#success")?.classList.remove("hidden");
 
       const ADMIN_NUMBER = "918825940013";
 
-      const msg =
-        "*CANDIDATE DETAILS*\n\n" +
-        "Name: " + payload.name + "\n" +
-        "Phone: " + payload.phone + "\n" +
-        "Experience: " + payload.experience;
-
       window.open(
-        `https://wa.me/${ADMIN_NUMBER}?text=${encodeURIComponent(msg)}`,
+        "https://wa.me/" + ADMIN_NUMBER + "?text=" + encodeURIComponent(detailsMsg),
         "_blank"
       );
     })
-    .catch(() => alert("Submission failed"));
+    .catch(() => alert("Submission failed. Please try again."));
   });
 
 });
-
