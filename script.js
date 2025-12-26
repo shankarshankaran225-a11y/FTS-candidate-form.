@@ -59,26 +59,17 @@ Example 2:
 Security purpose
 Returned within 30 days after de-registration & PF proof`;
 
-  /* ---------- STEP CONTROL ---------- */
-  function showStep(i) {
-    steps.forEach((s, idx) => s.classList.toggle("active", idx === i));
-    dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
-  }
-  showStep(currentStep);
+ const agreeAll = $("#agreeAll");
+  const serviceBoxes = $$(".service");
+  const termBoxes = $$(".term");
 
-  nextBtns.forEach(b => b.onclick = () => {
-    if (currentStep < steps.length - 1) showStep(++currentStep);
-  });
-  prevBtns.forEach(b => b.onclick = () => {
-    if (currentStep > 0) showStep(--currentStep);
-  });
-
-  /* ---------- MASTER CHECK ---------- */
   agreeAll?.addEventListener("change", () => {
-    [...serviceBoxes, ...termBoxes].forEach(c => c.checked = agreeAll.checked);
+    [...serviceBoxes, ...termBoxes].forEach(c => {
+      c.checked = agreeAll.checked;
+    });
   });
 
-  /* ---------- SUBMIT ---------- */
+  /* ===== SUBMIT ===== */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -86,6 +77,7 @@ Returned within 30 days after de-registration & PF proof`;
       alert("Please select ALL services");
       return;
     }
+
     if (!agreeAll.checked) {
       alert("Please accept all Terms & Conditions");
       return;
@@ -104,74 +96,59 @@ Returned within 30 days after de-registration & PF proof`;
       expectedCTC: val("#expectedCTC"),
       techKnowledge: val("#techKnowledge"),
       experience: val("#experience"),
+      noticePeriod: val("#noticeperiod"),
       pf: $('input[name="pf"]:checked')?.value || "",
       pfStart: val("#pfStart"),
       pfEnd: val("#pfEnd"),
       realtimeExperience: val("#realtimeExperience"),
+      referredBy: val("#referredBy"),
+      issue: val("#issue"),
       services: [...serviceBoxes].map(s => s.value).join(", "),
       terms: TERMS_TEXT
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbw_NUpA42_emkdQSgCfKXle-9a1NZO6BmLOjrO-1E0vxqOy7fAhqiSY9AYdBugBmMN4/exec", {
-      method: "POST",
-      body: JSON.stringify(payload)
-    })
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(payload)
+      }
+    )
     .then(() => {
 
-      form.classList.add("hidden");
-      $(".success")?.classList.remove("hidden");
+      $("#ftsForm").style.display = "none";
+      $("#success").classList.remove("hidden");
 
-      /* ---------- LINK ---------- */
-      const REGISTRATION_FORM_LINK =
-        "https://flashtechsolutions.com/registration";
+      const ADMIN_NUMBER = "918825940013";
+      const REG_LINK = "https://flashtechsolutions.com/registration";
 
-      /* ---------- COMMON DETAILS ---------- */
-      const detailsMsg =
-        " *CANDIDATE DETAILS*\n\n" +
-        " Name: " + payload.name + "\n" +
-        " Email: " + payload.email + "\n" +
-        " Phone: " + payload.phone + "\n\n" +
-        " Role: " + payload.role + "\n" +
-        " Designation: " + payload.designation + "\n\n" +
-        " Current CTC: " + payload.currentCTC + "\n" +
-        " Expected CTC: " + payload.expectedCTC + "\n\n" +
-        " Tech: " + payload.techKnowledge + "\n" +
-        " Experience: " + payload.experience + "\n\n" +
-        " PF: " + payload.pf + "\n" +
-        " PF Start: " + payload.pfStart + "\n" +
-        " PF End: " + payload.pfEnd + "\n\n" +
-        " Real Time Experience:\n" +
-        payload.realtimeExperience + "\n\n" +
-        " Services:\n" + payload.services + "\n\n" +
-        " Terms: TERMS_TEXT\n\n";
+      const msg =
+        "*CANDIDATE DETAILS*\n\n" +
+        "Name: " + payload.name + "\n" +
+        "Phone: " + payload.phone + "\n" +
+        "Experience: " + payload.experience + "\n";
 
-      /* ---------- CANDIDATE WHATSAPP (WITH LINK) ---------- */
+      window.open(
+        `https://wa.me/${ADMIN_NUMBER}?text=${encodeURIComponent(msg)}`,
+        "_blank"
+      );
+
       if (phoneClean.length === 10) {
-        const candidateMsg =
-          detailsMsg +
-          "🔗 *Registration Form Link*\n" +
-          REGISTRATION_FORM_LINK + "\n\n" +
-          "— *Flash Tech Solutions*";
-
-        window.open(
-          `https://wa.me/91${phoneClean}?text=${encodeURIComponent(candidateMsg)}`,
-          "_blank"
-        );
+        setTimeout(() => {
+          window.open(
+            `https://wa.me/91${phoneClean}?text=${encodeURIComponent(msg + "\n" + REG_LINK)}`,
+            "_blank"
+          );
+        }, 4000);
       }
+    })
+    .catch(() => alert("Submission failed. Please try again."));
+  });
 
-      /* ---------------- ADMIN WHATSAPP (NO LINK) ---------------- */
-      const ADMIN_NUMBER = "918825940013"; // change admin number
+});
 
-      setTimeout(() => {
-        const adminMsg =
-          detailsMsg +
-          "\n\n— *Flash Tech Solutions (Admin)*";
 
-        window.open(
-          `https://wa.me/${ADMIN_NUMBER}?text=${encodeURIComponent(adminMsg)}`,
-          "_blank"
-        );
-      }, 1200);
+
 
     })
     .catch(() => {
