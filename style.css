@@ -4,6 +4,8 @@
 * {
   box-sizing: border-box;
   font-family: Poppins, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
 }
 
 body {
@@ -20,12 +22,18 @@ body {
 /* ===============================
    BACKGROUND
 ================================ */
-.bg {
-  position: fixed;
-  inset: 0;
-  background: url("https://your-red-office-image.jpg")
-    center / cover no-repeat;
-  filter: blur(6px);
+.bg-overlay {
+  background:
+    linear-gradient(
+      120deg,
+      rgba(255, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.85)
+    ),
+    url("https://your-red-office-image.jpg")
+      right center / cover no-repeat;
+
+  mix-blend-mode: screen;
+  opacity: 0.6;
   z-index: -1;
 }
 
@@ -353,5 +361,6 @@ input[type="radio"] {
   }
 
 }
+
 
 
