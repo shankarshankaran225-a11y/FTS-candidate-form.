@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTS Candidate Form</title>
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- 🔐 PASSWORD SCREEN -->
+<div class="password-box" id="passwordBox">
+  <h2>🔐 Private Access</h2>
+  <p>Enter Password to Continue</p>
+  <input type="password" id="sitePassword" placeholder="Enter Password">
+  <button id="unlockBtn">Unlock</button>
+  <p class="error" id="passwordError"></p>
+</div>
+
+<!-- ================= ACTUAL SITE ================= -->
+<div class="site hidden" id="siteContent">
+
+  <!-- BRAND -->
+  <div class="brand">
+    FLASH TECH <strong>SOLUTIONS</strong>
+  </div>
+
+  <div class="footer-text">
+    © <span id="year"></span> Powered by <strong>Flash Tech Solutions</strong>
+  </div>
+
+  <!-- BACKGROUND -->
+  <div class="bg"></div>
+
+  <!-- GLASS FORM -->
+  <div class="glass-form">
+
+    <!-- STEP DOTS -->
+    <div class="steps">
+      <span class="step active"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+    </div>
+
+    <!-- FORM -->
+    <form id="ftsForm">
+
+      <!-- STEP 1 -->
+      <div class="form-step active">
+        <h2>Basic Details</h2>
+
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" placeholder="Contact Number" required>
+        <input type="date" id="date" required>
+
+        <input type="text" id="designation" placeholder="Designation">
+        <input type="text" id="role" placeholder="Role">
+
+        <button type="button" class="next">Next</button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="form-step">
+        <h2>Professional Details</h2>
+
+        <input type="text" id="currentCTC" placeholder="Current CTC">
+        <input type="text" id="expectedCTC" placeholder="Expected CTC">
+        <textarea id="techKnowledge" placeholder="Technology Knowledge"></textarea>
+
+        <input type="text" id="noticePeriod" placeholder="Notice Period">
+        <input type="text" id="experience" placeholder="Experience">
+        <input type="text" id="graduation" placeholder="Graduation Year + Backlogs">
+
+        <div class="row">
+          <label>PF Available?</label>
+          <label><input type="radio" name="pf" value="Yes"> Yes</label>
+          <label><input type="radio" name="pf" value="No"> No</label>
+        </div>
+
+        <input type="text" id="pfStart" placeholder="PF Start Date">
+        <input type="text" id="pfEnd" placeholder="PF End Date">
+        <input type="text" id="realtimeExperience" placeholder="Real Time Experience">
+
+        <button type="button" class="prev">Back</button>
+        <button type="button" class="next">Next</button>
+      </div>
+
+      <div class="form-step">
+        <h2>FTS Services & Terms</h2>
+      
+        <!-- SERVICES -->
+        <div class="check-row service-row">
+          <input type="checkbox" class="service" value="Resume Preparation">
+          <span>Resume Preparation</span>
+        </div>
+      
+        <div class="check-row service-row">
+          <input type="checkbox" class="service" value="Optimize Naukri">
+          <span>Optimize Naukri</span>
+        </div>
+      
+        <div class="check-row service-row">
+          <input type="checkbox" class="service" value="Interview Crack">
+          <span>Interview Crack</span>
+        </div>
+      
+        <div class="check-row service-row">
+          <input type="checkbox" class="service" value="Support Contact">
+          <span>Support Contact</span>
+        </div>
+      
+        <div class="check-row service-row">
+          <input type="checkbox" class="service" value="5 Month Job Guarantee">
+          <span>5 Month Job Guarantee</span>
+        </div>
+      
+        <!-- TERMS BOX -->
+        <div class="terms-box">
+          <h3>Service Terms</h3>
+      
+          <p>
+            <strong>Example 1:</strong><br>
+            3 Month CTC – <b>12 LPA (₹3,00,000)</b><br>
+            Candidate take-home – <b>₹30,000</b><br>
+            Remaining amount paid to <b>FTS</b>
+          </p>
+      
+          <p>
+            <b>Document Charges:</b><br>
+            ₹30,000 (only when HR asks)<br>
+            Document generation time – <b>3 Hours</b>
+          </p>
+      
+          <p>
+            <strong>Example 2:</strong><br>
+            1 cheque required before first interview<br>
+            Security purpose only<br>
+            Returned within <b>30 days</b> after de-registration & PF proof
+          </p>
+        </div>
+      
+        <!-- TERMS CHECK -->
+        <div class="check-row term-row">
+          <input type="checkbox" class="term">
+          <span>I understand the salary sharing model</span>
+        </div>
+      
+        <div class="check-row term-row">
+          <input type="checkbox" class="term">
+          <span>I agree to document charges</span>
+        </div>
+      
+        <div class="check-row term-row">
+          <input type="checkbox" class="term">
+          <span>I accept cheque security policy</span>
+        </div>
+      
+        <!-- MASTER -->
+        <div class="check-row term-row master">
+          <input type="checkbox" id="agreeAll">
+          <span><b>Accept All Terms & Conditions</b></span>
+        </div>
+      
+        <button type="button" class="prev">Back</button>
+        <button type="submit">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success hidden">
+    <h2>Submitted Successfully</h2>
+    <p>Our team will contact you soon</p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
