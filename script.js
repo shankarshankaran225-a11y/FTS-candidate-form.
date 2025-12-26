@@ -38,8 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!form || !steps.length) return;
 
   /* ---------- TERMS ---------- */
-  const TERMS_TEXT =
-`Accepted – Flash Tech Solutions Terms & Conditions
+const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms & Conditions
 
 Example 1:
 3 Month CTC – 12 LPA (₹3,00,000)
@@ -55,15 +54,12 @@ Example 2:
 Security purpose
 Returned within 30 days after de-registration & PF proof`;
 
- const agreeAll = $("#agreeAll");
-  const serviceBoxes = $$(".service");
-  const termBoxes = $$(".term");
-
-  agreeAll?.addEventListener("change", () => {
-    [...serviceBoxes, ...termBoxes].forEach(c => {
-      c.checked = agreeAll.checked;
-    });
+agreeAll?.addEventListener("change", () => {
+  [...serviceBoxes, ...termBoxes].forEach(c => {
+    c.checked = agreeAll.checked;
   });
+});
+
 
   /* ===== SUBMIT ===== */
   form.addEventListener("submit", (e) => {
@@ -154,4 +150,5 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
+
 
