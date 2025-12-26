@@ -6,43 +6,43 @@
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  
+
   /* ---------- PASSWORD ---------- */
   const SITE_PASSWORD = "FTS@2026";
 
-  document.getElementById("unlockBtn").onclick = () => {
-    const val = document.getElementById("sitePassword").value;
-    if (val === SITE_PASSWORD) {
-      document.getElementById("passwordBox").style.display = "none";
-      document.getElementById("siteContent").classList.remove("hidden");
+  const unlockBtn = document.getElementById("unlockBtn");
+  const sitePassword = document.getElementById("sitePassword");
+  const passwordBox = document.getElementById("passwordBox");
+  const siteContent = document.getElementById("siteContent");
+  const passwordError = document.getElementById("passwordError");
+
+  unlockBtn?.addEventListener("click", () => {
+    if (sitePassword.value === SITE_PASSWORD) {
+      passwordBox.style.display = "none";
+      siteContent.classList.remove("hidden");
+      passwordError.textContent = "";
     } else {
-      document.getElementById("passwordError").innerText = "Wrong Password";
+      passwordError.textContent = "Wrong Password";
     }
-  };
+  });
 
-  document.getElementById("year").textContent =
-  new Date().getFullYear();
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- FORM LOGIC ---------- */
+  /* ---------- HELPERS ---------- */
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => document.querySelectorAll(s);
 
- const $ = (s) => document.querySelector(s);
-const $$ = (s) => document.querySelectorAll(s);
+  /* ---------- FORM ---------- */
+  const form = $("#ftsForm");
+  if (!form) return;
 
-const form = $("#ftsForm");
-const steps = $$(".form-step");
-const dots = $$(".step");
-const nextBtns = $$(".next");
-const prevBtns = $$(".prev");
-
-const agreeAll = $("#agreeAll");
-const serviceBoxes = $$(".service");
-const termBoxes = $$(".term");
-
-let currentStep = 0;
-if (!form || !steps.length) return;
+  const agreeAll = $("#agreeAll");
+  const serviceBoxes = $$(".service");
+  const termBoxes = $$(".term");
 
   /* ---------- TERMS ---------- */
-const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms & Conditions
+  const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms & Conditions
 
 Example 1:
 3 Month CTC – 12 LPA (₹3,00,000)
@@ -58,14 +58,13 @@ Example 2:
 Security purpose
 Returned within 30 days after de-registration & PF proof`;
 
-agreeAll?.addEventListener("change", () => {
-  [...serviceBoxes, ...termBoxes].forEach(c => {
-    c.checked = agreeAll.checked;
+  agreeAll?.addEventListener("change", () => {
+    [...serviceBoxes, ...termBoxes].forEach(c => {
+      c.checked = agreeAll.checked;
+    });
   });
-});
 
-
-  /* ===== SUBMIT ===== */
+  /* ---------- SUBMIT ---------- */
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -74,7 +73,7 @@ agreeAll?.addEventListener("change", () => {
       return;
     }
 
-    if (!agreeAll.checked) {
+    if (!agreeAll?.checked) {
       alert("Please accept all Terms & Conditions");
       return;
     }
@@ -107,13 +106,13 @@ agreeAll?.addEventListener("change", () => {
       "https://script.google.com/macros/s/AKfycbzsWd3q8RRrqI1p9rcPexpq1JjsrgYfzmYte-zgvHQJsLlHrMHr3cUsIgdrQLyxr7NI/exec",
       {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
       }
     )
     .then(() => {
-
       $("#ftsForm").style.display = "none";
-      $("#success").classList.remove("hidden");
+      $("#success")?.classList.remove("hidden");
 
       const ADMIN_NUMBER = "918825940013";
       const REG_LINK = "https://flashtechsolutions.com/registration";
@@ -142,4 +141,3 @@ agreeAll?.addEventListener("change", () => {
   });
 
 });
-
