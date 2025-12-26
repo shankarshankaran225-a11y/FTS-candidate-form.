@@ -59,7 +59,7 @@ Example 2:
 Security purpose
 Returned within 30 days after de-registration & PF proof`;
 
- const agreeAll = $("#agreeAll");
+  const agreeAll = $("#agreeAll");
   const serviceBoxes = $$(".service");
   const termBoxes = $$(".term");
 
@@ -158,3 +158,4 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
+
