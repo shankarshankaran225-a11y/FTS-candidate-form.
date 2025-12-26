@@ -1,24 +1,41 @@
-const SITE_PASSWORD = "FTS@2026";
+/* =====================================================
+   FLASH TECH SOLUTIONS
+   FINAL ALL-IN-ONE JS
+   Password + Multi-Step Form + WhatsApp Submit
+===================================================== */
 
-  document.getElementById("unlockBtn").onclick = () => {
-    const val = document.getElementById("sitePassword").value;
-    if (val === SITE_PASSWORD) {
-      document.getElementById("passwordBox").style.display = "none";
-      document.getElementById("siteContent").classList.remove("hidden");
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ---------- PASSWORD ---------- */
+  const SITE_PASSWORD = "FTS@2026";
+
+  const unlockBtn = document.getElementById("unlockBtn");
+  const sitePassword = document.getElementById("sitePassword");
+  const passwordBox = document.getElementById("passwordBox");
+  const siteContent = document.getElementById("siteContent");
+  const passwordError = document.getElementById("passwordError");
+
+  unlockBtn?.addEventListener("click", () => {
+    if (sitePassword.value === SITE_PASSWORD) {
+      passwordBox.style.display = "none";
+      siteContent.classList.remove("hidden");
+      passwordError.textContent = "";
     } else {
-      document.getElementById("passwordError").innerText = "Wrong Password";
+      passwordError.textContent = "Wrong Password";
     }
-  };
+  });
 
-  document.getElementById("year").textContent =
-  new Date().getFullYear();
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- FORM LOGIC ---------- */
-
+  /* ---------- HELPERS ---------- */
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => document.querySelectorAll(s);
 
+  /* ---------- FORM ELEMENTS ---------- */
   const form = $("#ftsForm");
+  if (!form) return;
+
   const steps = $$(".form-step");
   const dots = $$(".step");
   const nextBtns = $$(".next");
@@ -27,6 +44,39 @@ const SITE_PASSWORD = "FTS@2026";
   const agreeAll = $("#agreeAll");
   const serviceBoxes = $$(".service");
   const termBoxes = $$(".term");
+
+  /* ---------- STEP LOGIC ---------- */
+  let currentStep = 0;
+
+  const showStep = (index) => {
+    steps.forEach((step, i) => {
+      step.style.display = i === index ? "block" : "none";
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("active", i === index);
+    });
+  };
+
+  showStep(currentStep);
+
+  nextBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    });
+  });
+
+  prevBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    });
+  });
 
   /* ---------- TERMS ---------- */
   const TERMS_TEXT = `Accepted – Flash Tech Solutions Terms & Conditions
@@ -60,7 +110,7 @@ Returned within 30 days after de-registration & PF proof`;
       return;
     }
 
-    if (!agreeAll?.checked) {
+    if (!agreeAll.checked) {
       alert("Please accept all Terms & Conditions");
       return;
     }
@@ -98,7 +148,7 @@ Returned within 30 days after de-registration & PF proof`;
       }
     )
     .then(() => {
-      $("#ftsForm").style.display = "none";
+      form.style.display = "none";
       $("#success")?.classList.remove("hidden");
 
       const ADMIN_NUMBER = "918825940013";
@@ -128,4 +178,3 @@ Returned within 30 days after de-registration & PF proof`;
   });
 
 });
-
